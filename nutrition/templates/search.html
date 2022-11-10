@@ -1,0 +1,455 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %} Search {% endblock %}
+
+
+{% block content %}
+
+<div class="nutrition-section">
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            
+            
+                
+            <h5 class="modal-title" id="exampleModalLabel">100g of Broccoly contains: </h5>
+        
+        
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid" id="all-data">
+                <table id="modeltable" class="table table-striped table-bordered modeltable" style="width:100%">
+                    <thead class="table-head">
+                        <tr>
+                            <th>Name</th> 
+                            <th>Measure</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="table-body" class="table-body">  
+                        
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th> 
+                            <th>Measure</th> 
+                        </tr>
+                    </tfoot>
+                </table>
+               
+                     
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="container">
+
+    
+
+    <div class="row d-flex justify-content-center mt-5 ">
+
+    <div class="col-md-10">
+        
+        <div class="card">
+
+          <div class="d-flex justify-content-between align-items-center">
+
+              <strong><h3 class="font-weight-bold text-center">GET INGREDIENTS INFO:</h3></strong>
+
+              <div class="d-flex flex-row">
+
+                <button class="btn btn-primary mr-2 active">All</button>
+                <button class="btn btn-primary new">Detailed</button>
+                
+              </div>
+          
+          </div>
+
+          <div class="mt-3 inputs">
+
+            <form id="search-form" onsubmit="return false;" autocomplete="off">
+                {% csrf_token %}
+
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control" id="search-input" placeholder="Search Ingredients...">
+
+            </form>
+              
+            
+          </div>
+
+          <div class="result-box not-visible" id="results-box">
+
+
+
+          <!-- <div class="mt-3 mx-2">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+              <div class="d-flex flex-row align-items-center">
+
+                <span type="button" class="star btn btn-primary border-0 content-text-2"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fullInfo('Hello')"><i class="fa-solid fa-info"></i></span>
+                
+
+                <div class="d-flex flex-column">
+                  <span>Spices, ground, savory</span>
+                  <div class="d-flex flex-row align-items-center time-text">
+                    <small>Measure: 100g</small>
+                    <span class="dots"></span>
+                    <small>Calories: 381 kcal</small>
+                    <span class="dots"></span>
+                    <small>Fat: 0.1g</small>
+                   
+                  </div>
+
+                </div>
+              </div>
+              <span class="star"><i class="fa-solid fa-carrot yellow"></i></span>
+            </div>
+            
+          </div> -->
+
+          </div>
+          
+        </div>
+
+    </div>
+    
+
+  </div>
+
+</div>
+
+</div>
+
+<script>
+    
+
+const url = window.location.href
+const searchForm = document.getElementById('search-form')
+const searchInput = document.getElementById('search-input')
+const resultsBox = document.getElementById('results-box')
+
+
+const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+
+const sendSearchData = (game) => {
+    $.ajax({
+        type: 'POST',
+        url: '/search/',
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'game': game,
+        },
+        success: (res)=> {
+            const data = res.data
+
+            if (Array.isArray(data)){
+                resultsBox.innerHTML = "";
+                // console.log(searchInput.value.length);
+                data.forEach(model=> {
+                    // console.log(model);
+                    resultsBox.innerHTML += `<div class="mt-3 mx-2">
+                                                <div class="d-flex justify-content-between align-items-center">
+
+                                                <div class="d-flex flex-row align-items-center">
+
+                                                    
+                                                    <span type="button" class="star btn btn-primary border-0 content-text-2"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fullInfo(${model.pk})"><i class="fa-solid fa-info"></i></span>
+
+                                                    <div class="d-flex flex-column">
+                                                    <span>${model.name}</span>
+                                                    <div class="d-flex flex-row align-items-center time-text">
+                                                        <small>Measure: ${model.serving_size}</small>
+                                                        <span class="dots"></span>
+                                                        <small>Calories: ${model.calories} kcal</small>
+                                                        <span class="dots"></span>
+                                                        <small>Fat: ${model.total_fat}</small>
+                                                    </div>
+
+                                                    </div>
+                                                </div>
+                                                <span class="star"><i class="fa-solid fa-carrot yellow"></i></span>
+                                                
+                                                </div>
+
+                                                </div>`
+                })
+            }
+            else{
+                if (searchInput.value.length > 0){
+                    resultsBox.innerHTML = `<p>${data}</p>`
+                }
+                else{
+                    resultsBox.classList.add('not-visible')
+                }
+            }
+        },
+        error: (err)=> {
+            console.log(err)
+        }
+    })
+}
+
+searchInput.addEventListener('keyup', e=>{
+    // console.log(e.target.value)
+
+    if (resultsBox.classList.contains('not-visible')){
+        resultsBox.classList.remove('not-visible')
+    }
+
+    sendSearchData(e.target.value)
+})
+
+
+const modelTitle = document.getElementById('exampleModalLabel');
+const allData = document.getElementById('table-body');
+
+
+const fullData = (game) => {
+    $.ajax({
+        type: 'POST',
+        url: '/data_ingredient/',
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'game': game,
+        },
+        success: (res)=> {
+            const data = res.data
+
+            allData.innerHTML = ``;
+
+            modelTitle.innerHTML = data["serving_size"]+" of '<strong>"+data["name"]+"</strong>' contains:";
+
+            for (const [key, value] of Object.entries(data)) {
+                console.log(key, value);
+                if (key != "id" && key != "name" && key != "serving_size"){
+
+                    if(key == "calories"){
+                        allData.innerHTML += `<tr>
+                                                <td>${key}</td>
+                                                <td>${value} kcal</td>
+                                            </tr>`;
+
+                    }
+                    else{
+                        allData.innerHTML += `<tr>
+                                                <td>${key}</td>
+                                                <td>${value}</td>
+                                            </tr>`;
+
+                    }
+                
+                    
+                
+                }
+                
+            }
+
+        },
+        error: (err)=> {
+            console.log(err)
+        }
+    })
+}
+
+function fullInfo(val){
+    
+        fullData(val);
+}
+
+</script>
+    
+
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+
+.nutrition-section{
+
+ font-family: "Poppins", sans-serif;
+ font-weight: 300;
+
+
+}
+
+.btn{
+
+ border-radius: 25px;
+
+}
+
+.new{
+     font-size: 12px;
+}
+
+.card{
+
+ padding: 20px;
+ border:none;
+
+}
+
+.result-box{
+
+    overflow-y: scroll; 
+    height:350px;
+
+}
+
+
+.active{
+
+ background: #f6f7fb !important;
+ border-color: #f6f7fb !important;
+ color: #000 !important;
+     font-size: 12px;
+
+}
+
+.inputs{
+
+ position: relative;
+
+}
+
+.form-control {
+     text-indent: 15px;
+ /* border: none; */
+ height: 45px;
+ border-radius: 50px;
+ /* border-bottom: 2px solid #eee; */
+}
+
+.form-control:focus {
+ color: #495057;
+ background-color: #fff;
+ border-color: #eee;
+ outline: 0;
+ box-shadow: none;
+ border: 2px solid rgb(188, 186, 186);
+}
+
+
+/* .form-control:focus  {
+ color: blue;
+} */
+
+.inputs i{
+
+     position: absolute;
+ top: 14px;
+ left: 4px;
+ color: #b8b9bc;
+}
+
+.star{
+
+ height: 40px;
+ width: 40px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background: #eee;
+ margin-right: 10px;
+ border-radius: 5px;
+
+}
+
+.time-text{
+
+     font-size: 12px;
+     color: #989898;
+}
+
+.dots{
+
+ height: 7px;
+ width: 7px;
+ background-color: #eee;
+ display: flex;
+ border-radius: 50%;
+ margin-left:7px;
+ margin-right: 7px;
+}
+
+.yellow{
+
+ color: #ffab2e;
+}
+
+.content-text-1{
+
+ height: 40px;
+ width: 40px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ border-radius: 50%;
+ background-color: #ffe7cc;
+ color: #ffa03a;
+ font-weight: 700;
+
+}
+
+
+.blue{
+
+ color: #6ecce6;
+}
+
+
+.content-text-2{
+
+ height: 40px;
+ width: 40px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ border-radius: 50%;
+ background-color: #e2f5fa;
+ color: #6ecce6;
+ font-weight: 700;
+
+}
+
+
+.dark-blue{
+
+ color: #572ce8;
+}
+
+
+.content-text-3{
+
+ height: 40px;
+ width: 40px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ border-radius: 50%;
+ background-color:#572ce86b;
+ color: #572ce8;
+ font-weight: 700;
+
+}
+
+
+</style>
+
+
+{% endblock %}

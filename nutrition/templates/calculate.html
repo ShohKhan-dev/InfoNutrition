@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %} Calculate {% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="col-md-10">
+        <div class="row">
+            <h2>DRI Calculator for Healthcare Professionals</h2>
+            <br><br>
+            <p>This tool will calculate daily nutrient recommendations based on the Dietary Reference Intakes (DRIs) established by the Health and Medicine Division of the National Academies of Sciences, Engineering and Medicine. The data represents the most current scientific knowledge on nutrient needs. Individual requirements may be higher or lower than DRI recommendations.
+                <br>
+                <br>
+                Enter height, weight, age, and activity level to generate a report of the following items:
+                <br><br>
+                Body Mass Index (BMI)
+                <br>
+                Estimated daily calorie needs
+                <br>
+                Recommended intakes of macronutrients, water, vitamins, and minerals based on DRI data
+            </p>
+        </div>
+
+        <div class="row">
+            <h2>To begin, please enter the following data:</h2>
+
+            <form class="row g-3 needs-validation" method="POST" validate>
+                {% csrf_token %}
+            
+                <div class="row my-4">
+                    <h5>Sex:</h5>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" name="sex" type="radio" value="male" onclick="maleSelected(this)" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                        Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="sex" onselect="" type="radio" value="female" onclick="maleSelected(this)" id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        Female
+                        </label>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4">
+                        <h5>Age:</h5>
+                        <hr>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="age" step=any id="age-input" min="0.1" max="120" aria-describedby="age-addon" required>
+                            <span class="input-group-text" id="age-addon">Years</span>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Height:</h5>
+                        <hr>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="height" id="height-input" min="1" aria-describedby="height-addon" required>
+                            <span class="input-group-text" id="height-addon">Centimeters</span>
+                            
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>Weight:</h5>
+                        <hr>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="weight" id="weight-input" min="1" aria-describedby="weight-addon" required>
+                            <span class="input-group-text" id="weight-addon">Kilograms</span>
+                            
+                        </div>
+
+                    </div>
+                    
+                
+                </div>
+
+                <div class="row mt-4">
+                    <h5>Pregnant or Lactating?:</h5>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <select class="form-select" aria-label="Default select example" id="pregnancy" name="pregnancy" required>
+                            <option selected disabled value="">--Select--</option>
+                            <option value="not-pregnant-lactating">Not Pregnant or Lactating</option>
+                            <option value="pregnant-1st-trimester">Pregnant 1st Trimester</option>
+                            <option value="pregnant-2nd-trimester">Pregnant 2nd Trimester (Less than 20 Weeks)</option>
+                            <option value="pregnant-2nd-trimester-more">Pregnant 2nd Trimester (More than 20 Weeks)</option>
+                            <option value="pregnant-3rd-trimester">Pregnant 3rd Trimester</option>
+                            <option value="lactating-0-6-months">Lactating - 0-6 Months</option>
+                            <option value="lactating-over-7-months">Lactating - Over 7 Months</option>
+
+                        </select>
+            
+                    </div>
+                </div>
+
+        
+
+                <div class="row my-4">
+                    <h5>Activity Level:</h5>
+                    <hr>
+                    <div class="input-group mb-3 has-validation">
+                        <select class="form-select" name="activity" aria-label="Default select example" required>
+                            <option selected disabled value="">--Select--</option>
+                            <option value="sedentary">Sedentary</option>
+                            <option value="low-active">Low Active</option>
+                            <option value="active">Active</option>
+                            <option value="very-active">Very Active</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select Activity Level!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="reset" class="btn btn-primary">Clear Form</button>
+                    </div>
+                </div>
+                
+            </form>
+
+           
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const pregnancy = document.getElementById('pregnancy');
+
+    function maleSelected(radioBut){
+        if (radioBut.value == "male"){
+            pregnancy.disabled = true;
+        }
+        else{
+            pregnancy.disabled = false;
+        }
+    }
+</script>
+
+
+
+{% endblock %}

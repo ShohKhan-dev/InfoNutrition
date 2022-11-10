@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block title %} Article {% endblock %}
+
+
+{% block content %} 
+
+<section class="flex align-items-center">
+    <div class="container">
+        <div class="row article-wrapper justify-center align-top">
+          <div class="article-header col-md-8">
+            <h1 class="title">This is test article</h1>
+            <div class="date">
+              
+              <span>12 February, 2022</span>
+            </div>
+          </div>
+
+          <article class="content col-md-8 col-12">
+                <figure>
+                    <div class="figure_wrapper">
+                        <img src="{% static 'img/article-standart.png' %}" class="img-fluid">
+                    </div>
+                </figure>
+
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum corrupti tenetur in autem, facilis id tempora eum ullam, fugit ducimus eligendi et quis iste aliquam consequuntur incidunt? Perferendis, eos? Temporibus.</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum corrupti tenetur in autem, facilis id tempora eum ullam, fugit ducimus eligendi et quis iste aliquam consequuntur incidunt? Perferendis, eos? Temporibus.</p>
+                <figure>
+                    <div class="figure_wrapper">
+                    <img src="{% static 'img/article-make.png' %}" class="img-fluid"></div>
+                </figure>
+
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum corrupti tenetur in autem, facilis id tempora eum ullam, fugit ducimus eligendi et quis iste aliquam consequuntur incidunt? Perferendis, eos? Temporibus.</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum corrupti tenetur in autem, facilis id tempora eum ullam, fugit ducimus eligendi et quis iste aliquam consequuntur incidunt? Perferendis, eos? Temporibus.</p>
+
+                <figure>
+                    <div class="figure_wrapper">
+                    <img src="{% static 'img/article-analiz.png' %}" class="img-fluid"></div>
+                </figure>
+
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum corrupti tenetur in autem, facilis id tempora eum ullam, fugit ducimus eligendi et quis iste aliquam consequuntur incidunt? Perferendis, eos? Temporibus.</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum corrupti tenetur in autem, facilis id tempora eum ullam, fugit ducimus eligendi et quis iste aliquam consequuntur incidunt? Perferendis, eos? Temporibus.</p>
+
+                <p>This was just a test Article!</p>
+          </article>
+
+          
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

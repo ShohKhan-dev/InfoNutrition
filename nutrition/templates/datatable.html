@@ -1,0 +1,30 @@
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                {% for name in table_names %}
+                    <th>{{name}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for temp in data %}
+                <tr>
+                    {% for item in temp %}
+                        <td>{{item}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                {% for name in table_names %}
+                    <th>{{name}}</th>
+                {% endfor %}
+            </tr>
+        </tfoot>
+    </table>
+    
+    
+   

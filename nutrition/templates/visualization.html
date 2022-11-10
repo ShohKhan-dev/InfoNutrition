@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %} Visualizations {% endblock %}
+
+{% block second_nav %}
+
+    {% include 'second_nav.html' %}
+    
+{% endblock %}
+
+{% block content %}
+
+    <h1>Table:</h1>
+
+    <div class="container justify-center">
+        <div class="row">
+            {% include 'datatable.html' %}
+        </div>
+    </div>
+
+{% endblock %}

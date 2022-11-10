@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block title %} Visualizations {% endblock %}
+
+{% block second_nav %}
+
+    {% include 'second_nav.html' %}
+    
+{% endblock %}
+
+{% block content %}
+
+<h1>Charts:</h1>
+
+<div class="container text-center justify-center">
+    <div class="row">
+      <div class="col-md-6 my-4">
+        <canvas id="myChart" style="max-width:500px; max-height:500px"></canvas>
+      </div>
+      <div class="col-md-6 my-4">
+        <canvas id="myChart1" style="max-width:500px; max-height:500px"></canvas>
+      </div>
+    </div>
+</div>
+
+<!-- <canvas id="myChart" style="max-width:500px; max-height:500px"></canvas> -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script> -->
+<script src="{% static 'js/chartjs-plugin-datalabels.min.js' %}"></script> 
+
+
+
+<script>
+    var xValues = {{labels|safe}};
+    var yValues = {{data|safe}};
+
+    const barColors = [];
+    const borderColors = [];
+
+
+
+    for (i=0; i<xValues.length; i++){
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+
+        barColors.push('rgba('+r+', '+g+', '+b+', 0.2)');
+        borderColors.push('rgba('+r+', '+g+', '+b+', 1)');
+
+
+    };
+    
+
+
+   
+
+    // config 
+    const config = {
+        type: 'pie',
+        data: {
+            labels: xValues,
+            datasets: [{
+                label: 'Weekly Sales',
+                data: yValues,
+                backgroundColor: barColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+    options: {
+        scales: {
+        },
+        plugins: {
+        tooltip: {
+            enabled: true,
+        },
+        datalabels: {
+            formatter: (value, context) => {
+
+                const datapoints = context.chart.data.datasets[0].data;
+                function totalSum(total, datapoint){
+                    return total + datapoint;
+                }
+                const totalvalue = datapoints.reduce(totalSum, 0);
+                const percentageValue = (value / totalvalue * 100).toFixed(1);
+                return percentageValue;
+            }
+        }
+       },
+      }, 
+       plugins: [ChartDataLabels]
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      {
+        type: 'pie',
+        data: {
+            labels: xValues,
+            datasets: [{
+                label: 'Sample Data',
+                data: yValues,
+                backgroundColor: barColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            },
+            plugins: {
+            tooltip: {
+                enabled: true,
+            },
+            datalabels: {
+                formatter: (value, context) => {
+
+                    const datapoints = context.chart.data.datasets[0].data;
+                    function totalSum(total, datapoint){
+                        return total + datapoint;
+                    }
+                    const totalvalue = datapoints.reduce(totalSum, 0);
+                    const percentageValue = (value / totalvalue * 100).toFixed(1);
+                    return percentageValue+'%';
+                }
+            }
+        },
+        }, 
+        plugins: [ChartDataLabels]
+        }
+    );
+
+    const myChart1 = new Chart(
+      document.getElementById('myChart1'),
+      {
+        type: 'bar',
+        data: {
+            labels: xValues,
+            datasets: [{
+                label: 'Sample Data',
+                data: yValues,
+                backgroundColor: barColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            },
+            plugins: {
+            tooltip: {
+                enabled: true,
+            },
+            datalabels: {
+                formatter: (value, context) => {
+
+                    const datapoints = context.chart.data.datasets[0].data;
+                    function totalSum(total, datapoint){
+                        return total + datapoint;
+                    }
+                    const totalvalue = datapoints.reduce(totalSum, 0);
+                    const percentageValue = (value / totalvalue * 100).toFixed(1);
+                    return percentageValue+'%';
+                }
+            }
+        },
+        }, 
+        plugins: [ChartDataLabels]
+        }
+    );
+
+
+
+  
+</script>
+
+{% endblock %}

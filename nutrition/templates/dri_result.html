@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %} Calculate {% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="col-md-10">
+        <div class="row">
+            <h1>DRI Calculation Result:</h1>
+            <br><br>
+            <p>Daily nutrient recommendations are based on the Dietary Reference Intakes (DRIs) by age and gender. Nutrient recommendations based on the DRIs are meant to be applied to generally healthy people of a specific age and gender set. Individual nutrient requirements may be higher or lower than the DRIs. Consult a healthcare professional to determine individual nutrient requirements for those with specific health or medical conditions.
+                <a href="https://www.nal.usda.gov/legacy/fnic/dri-nutrient-reports">Learn more about the DRI</a>
+                <br>
+                <br>
+                <strong>Note:</strong> DRI amounts are set at levels to meet the nutrient requirements of almost all healthy people. Each reference value refers to average daily nutrient intake. 
+                Results are calculated based on <a href="https://nap.nationalacademies.org/catalog/11537/dietary-reference-intakes-the-essential-guide-to-nutrient-requirementshttps://nap.nationalacademies.org/catalog/11537/dietary-reference-intakes-the-essential-guide-to-nutrient-requirements">DRI Report.</a>
+            </p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 my-2">
+                <h2>Your Information:</h2>
+
+                <table class="table table-striped table-bordered" style="width:100%">
+                    <tbody>
+                            <tr> 
+                                <td><strong>Sex</strong></td>
+                                <td>{{sex}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Age</strong></td>
+                                <td>{{age}} years</td>     
+                            </tr>
+                            <tr>
+                                <td><strong>Pregnancy</strong></td>
+                                <td>{{pregnancy}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Height</strong></td>
+                                <td>{{height}} cm</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Weight</strong></td>
+                                <td>{{weight}} kg</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Activity level</strong></td>
+                                <td>{{activity}}</td>
+                            </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="col-md-6 my-2">
+
+                <h2>Main Information:</h2>
+
+                <table class="table table-striped table-bordered" style="width:100%">
+                    <tbody>
+                            <tr> 
+                                <td><strong>Body Mass Index</strong></td>
+                                <td>{{main_info.bmi}}</td>
+                            </tr>
+                            <tr> 
+                                <td><strong>Estimated Daily Caloric Needs</strong></td>
+                                <td>{{main_info.caloric_needs}} kcal/day</td>
+                            </tr>
+                            <tr> 
+                                <td><strong>Recommended Total Water</strong></td>
+                                <td>{{main_info.total_water}} liters</td>
+                            </tr>
+                            
+                    </tbody>
+                </table>
+
+            </div>
+            
+        </div>
+
+        
+
+        <div class="row my-2">
+
+            <div class="col-md-8">
+                <h2>Calculated Result:</h2>
+            
+                    <table class="table table-striped table-bordered" style="width:100%">
+
+                        <thead>
+                            <tr>
+                                
+                                <th>Macronutrient</th>
+                                <th>Recommended Intake Per Day</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> 
+                                <td>Carbohydrate</td>
+                                <td>{{result.carbohydrate}} grams</td>
+                            </tr>
+                            <tr> 
+                                <td>Total Fiber</td>
+                                <td>{{result.total_fiber}} grams</td>
+                            </tr>
+                            <tr> 
+                                <td>Protein</td>
+                                <td>{{result.protein}} grams</td>
+                            </tr>
+                            <tr> 
+                                <td>Fat</td>
+                                <td>{{result.fat}} grams</td>
+                            </tr>
+                            <tr> 
+                                <td>Saturated Fat</td>
+                                <td>{{result.sat_fat}}</td>
+                            </tr>
+                            <tr> 
+                                <td>Trans Fat</td>
+                                <td>{{result.trans_fat}}</td>
+                            </tr>
+                            <tr> 
+                                <td>Linoleic Acid</td>
+                                <td>{{result.l_acid}} grams</td>
+                            </tr>
+                            <tr> 
+                                <td>α-Linolenic Acid</td>
+                                <td>{{result.al_acid}} grams</td>
+                            </tr>
+                            <tr> 
+                                <td>Dietary Cholesterol</td>
+                                <td>{{result.dietary_cholesterol}}</td>
+                            </tr>
+                             
+                        </tbody>
+                    </table>
+
+            </div>
+
+        </div>
+
+        <div class="row my-2">
+
+            <h3>Vitamins:</h3>
+            <table class="table table-striped table-bordered" style="width:80%">
+
+                <thead>
+                    <tr>
+                        
+                        <th>Vitamins</th>
+                        <th>Recommended Intake Per Day</th>
+                        <th>Tolerable UL Intake Per Day</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr> 
+                            <td>Vitamin A</a></td>
+                            <td>{{ vitamins.vitamin_a.rda }} {% if vitamins.vitamin_a.rda %}mcg{% endif %}</td>
+                            <td>{{ vitamins.vitamin_a.ul }} {% if vitamins.vitamin_a.ul %}mcg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Vitamin B6</a></td>
+                            <td>{{ vitamins.vitamin_b_6.rda }} {% if vitamins.vitamin_b_6.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.vitamin_b_6.ul }} {% if vitamins.vitamin_b_6.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Vitamin B12</a></td>
+                            <td>{{ vitamins.vitamin_b_12.rda }} {% if vitamins.vitamin_b_12.rda %}mcg{% endif %}</td>
+                            <td>{{ vitamins.vitamin_b_12.ul }} {% if vitamins.vitamin_b_12.ul %}mcg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Vitamin C</a></td>
+                            <td>{{ vitamins.vitamin_c.rda }} {% if vitamins.vitamin_c.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.vitamin_c.ul }} {% if vitamins.vitamin_c.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Vitamin D</a></td>
+                            <td>{{ vitamins.vitamin_d.rda }} {% if vitamins.vitamin_d.rda %}mcg{% endif %}</td>
+                            <td>{{ vitamins.vitamin_d.ul }} {% if vitamins.vitamin_d.ul %}mcg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Vitamin E</a></td>
+                            <td>{{ vitamins.vitamin_e.rda }} {% if vitamins.vitamin_e.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.vitamin_e.ul }} {% if vitamins.vitamin_e.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Vitamin K</a></td>
+                            <td>{{ vitamins.vitamin_k.rda }} {% if vitamins.vitamin_k.rda %}mcg{% endif %}</td>
+                            <td>{{ vitamins.vitamin_k.ul }} {% if vitamins.vitamin_k.ul %}mcg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Thiamin</a></td>
+                            <td>{{ vitamins.thiamin.rda }} {% if vitamins.thiamin.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.thiamin.ul }} {% if vitamins.thiamin.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Riboflavin</a></td>
+                            <td>{{ vitamins.riboflavin.rda }} {% if vitamins.riboflavin.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.riboflavin.ul }} {% if vitamins.riboflavin.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Folate</a></td>
+                            <td>{{ vitamins.folate.rda }} {% if vitamins.folate.rda %}mcg{% endif %}</td>
+                            <td>{{ vitamins.folate.ul }} {% if vitamins.folate.ul %}mcg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Niacin</a></td>
+                            <td>{{ vitamins.niacin.rda }} {% if vitamins.niacin.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.niacin.ul }} {% if vitamins.niacin.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Choline</a></td>
+                            <td>{{ vitamins.choline.rda }} {% if vitamins.choline.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.choline.ul }} {% if vitamins.choline.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Pantothenic Acid</a></td>
+                            <td>{{ vitamins.pantothenic_acid.rda }} {% if vitamins.pantothenic_acid.rda %}mg{% endif %}</td>
+                            <td>{{ vitamins.pantothenic_acid.ul }} {% if vitamins.pantothenic_acid.ul %}mg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Biotin</a></td>
+                            <td>{{ vitamins.biotin.rda }} {% if vitamins.biotin.rda %}mcg{% endif %}</td>
+                            <td>{{ vitamins.biotin.ul }} {% if vitamins.biotin.ul %}mcg{% endif %}</td> 
+                        </tr>
+                        <tr> 
+                            <td>Carotenoids</a></td>
+                            <td>{{ vitamins.carotenoids.rda }} {% if vitamins.carotenoids.rda %}mcg{% endif %}</td>
+                            <td>{{ vitamins.carotenoids.ul }} {% if vitamins.carotenoids.ul %}mcg{% endif %}</td> 
+                        </tr>
+
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row my-2">
+            <h3>Minerals:</h3>
+            <table class="table table-striped table-bordered" style="width:80%">
+
+                <thead>
+                    <tr>
+                        
+                        <th>Minerals</th>
+                        <th>Recommended Intake Per Day</th>
+                        <th>Tolerable UL Intake Per Day</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr> 
+                        <td>Calcium</a></td>
+                        <td>{{ minerals.calcium.rda }} {% if minerals.calcium.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.calcium.ul }} {% if minerals.calcium.ul %}mg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Chloride</a></td>
+                        <td>{{ minerals.chloride.rda }} {% if minerals.chloride.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.chloride.ul }} {% if minerals.chloride.ul %}mg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Chromium</a></td>
+                        <td>{{ minerals.chromium.rda }} {% if minerals.chromium.rda %}mcg{% endif %}</td>
+                        <td>{{ minerals.chromium.ul }} {% if minerals.chromium.ul %}mcg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Copper</a></td>
+                        <td>{{ minerals.copper.rda }} {% if minerals.copper.rda %}mcg{% endif %}</td>
+                        <td>{{ minerals.copper.ul }} {% if minerals.copper.ul %}mcg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Fluoride</a></td>
+                        <td>{{ minerals.fluoride.rda }} {% if minerals.fluoride.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.fluoride.ul }} {% if minerals.fluoride.ul %}mg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Lodine</a></td>
+                        <td>{{ minerals.lodine.rda }} {% if minerals.lodine.rda %}mcg{% endif %}</td>
+                        <td>{{ minerals.lodine.ul }} {% if minerals.lodine.ul %}mcg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Iron</a></td>
+                        <td>{{ minerals.iron.rda }} {% if minerals.iron.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.iron.ul }} {% if minerals.iron.ul %}mg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Magnesium</a></td>
+                        <td>{{ minerals.magnesium.rda }} {% if minerals.magnesium.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.magnesium.ul }} {% if minerals.magnesium.ul %}mg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Manganese</a></td>
+                        <td>{{ minerals.manganese.rda }} {% if minerals.manganese.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.manganese.ul }} {% if minerals.manganese.ul %}mg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Molybdenum</a></td>
+                        <td>{{ minerals.molybdenum.rda }} {% if minerals.molybdenum.rda %}mcg{% endif %}</td>
+                        <td>{{ minerals.molybdenum.ul }} {% if minerals.molybdenum.ul %}mcg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Phosphorus</a></td>
+                        <td>{{ minerals.phosphorus.rda }} {% if minerals.phosphorus.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.phosphorus.ul }} {% if minerals.phosphorus.ul %}mg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Potassium</a></td>
+                        <td>{{ minerals.potassium.rda }} {% if minerals.potassium.rda %}g{% endif %}</td>
+                        <td>{{ minerals.potassium.ul }} {% if minerals.potassium.ul %}g{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Selenium</a></td>
+                        <td>{{ minerals.selenium.rda }} {% if minerals.selenium.rda %}mcg{% endif %}</td>
+                        <td>{{ minerals.selenium.ul }} {% if minerals.selenium.ul %}mcg{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Sodium</a></td>
+                        <td>{{ minerals.sodium.rda }} {% if minerals.sodium.rda %}g{% endif %}</td>
+                        <td>{{ minerals.sodium.ul }} {% if minerals.sodium.ul %}g{% endif %}</td> 
+                    </tr>
+                    <tr> 
+                        <td>Zinc</a></td>
+                        <td>{{ minerals.zinc.rda }} {% if minerals.zinc.rda %}mg{% endif %}</td>
+                        <td>{{ minerals.zinc.ul }} {% if minerals.zinc.ul %}mg{% endif %}</td> 
+                    </tr>
+                        
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
