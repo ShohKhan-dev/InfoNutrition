@@ -29,3 +29,5 @@ urlpatterns = [
 
     path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
+
+handler404 = 'nutrition.views.error_404_view'

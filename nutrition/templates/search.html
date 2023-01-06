@@ -234,7 +234,7 @@ const fullData = (game) => {
             modelTitle.innerHTML = data["serving_size"]+" of '<strong>"+data["name"]+"</strong>' contains:";
 
             for (const [key, value] of Object.entries(data)) {
-                console.log(key, value);
+                // console.log(key, value);
                 if (key != "id" && key != "name" && key != "serving_size"){
 
                     if(key == "calories"){

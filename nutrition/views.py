@@ -4,7 +4,6 @@ from django.http import JsonResponse
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from .models import MainCategory, BasicStats, BasicFood, AllFood, UseInfo, UserRDA, UserLog, UserLogFood, UserSDA
-import pandas as pd
 import pytz
 from datetime import datetime, timezone
 from .calculations import DRICalculations
@@ -103,6 +102,9 @@ def set_user_rda(request, main_info, result, vitamins, minerals, amino_acids):
                     phenylalanine=phenylalanine, tyrosine=tyrosine, threonine=threonine, tryptophan=tryptophan, valine=valine)
 
 
+def error_404_view(request, exception):
+    return render(request,'404.html')
+
 
 def dri_result(request):
     
@@ -165,7 +167,7 @@ def calculate(request):
         
         user_data = [sex, age, pregnancy, height, weight, activity]
 
-        print(sex, age, pregnancy, height, weight, activity, timezone)
+        # print(sex, age, pregnancy, height, weight, activity, timezone)
         
         if request.user.is_authenticated:
             if UseInfo.objects.filter(created_by=request.user).exists():
@@ -406,8 +408,6 @@ def data_date(request):
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         cur_date = request.POST.get('cur_date')
-
-        print(cur_date)
 
         date_time_obj = datetime.strptime(cur_date, '%Y-%m-%d')
 

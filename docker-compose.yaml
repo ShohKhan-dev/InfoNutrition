@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+ 
+  app:
+    build: .
+    volumes:
+      - .:/django
+      - static_volume:/django/staticfiles
+    expose:
+      - 8000
+    image: app:django
+    container_name: nutrition_app
+    command:  bash -c "python3 manage.py collectstatic --noinput --clear && gunicorn core.wsgi:application --bind 0.0.0.0:8000"
+
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/django/staticfiles
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+volumes:
+  static_volume:
