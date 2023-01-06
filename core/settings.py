@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_8l!a(485sxeqas!2_^ezf!2j(k9d9sm9$1ims9(pe73m7+ro6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'infonutrition.herokuapp.com', '.vercel.app', '.now.sh']
 
@@ -156,7 +156,7 @@ STATIC_URL = 'static/'
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = os.path.join(BASE_DIR,'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'static')
 
 
 # STATICFILES_DIRS = [
