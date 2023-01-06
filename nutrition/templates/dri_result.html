@@ -3,7 +3,7 @@
 {% load static %}
 
 
-{% block title %} Calculate {% endblock %}
+{% block title %} Result {% endblock %}
 
 
 
@@ -31,17 +31,20 @@
                 <table class="table table-striped table-bordered" style="width:100%">
                     <tbody>
                             <tr> 
-                                <td><strong>Sex</strong></td>
+                                <td><strong>Gender</strong></td>
                                 <td>{{sex}}</td>
                             </tr>
                             <tr>
                                 <td><strong>Age</strong></td>
                                 <td>{{age}} years</td>     
                             </tr>
-                            <tr>
-                                <td><strong>Pregnancy</strong></td>
-                                <td>{{pregnancy}}</td>
-                            </tr>
+                            {% if pregnancy %}
+                                <tr>
+                                    <td><strong>Pregnancy</strong></td>
+                                    <td>{{pregnancy}}</td>
+                                </tr>
+                            {% endif %}
+                            
                             <tr>
                                 <td><strong>Height</strong></td>
                                 <td>{{height}} cm</td>
@@ -89,7 +92,7 @@
 
         <div class="row my-2">
 
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <h2>Calculated Result:</h2>
             
                     <table class="table table-striped table-bordered" style="width:100%">
@@ -121,11 +124,11 @@
                             </tr>
                             <tr> 
                                 <td>Saturated Fat</td>
-                                <td>{{result.sat_fat}}</td>
+                                <td>{{result.sat_fat}} grams</td>
                             </tr>
                             <tr> 
                                 <td>Trans Fat</td>
-                                <td>{{result.trans_fat}}</td>
+                                <td>{{result.trans_fat}} grams</td>
                             </tr>
                             <tr> 
                                 <td>Linoleic Acid</td>
@@ -137,7 +140,77 @@
                             </tr>
                             <tr> 
                                 <td>Dietary Cholesterol</td>
-                                <td>{{result.dietary_cholesterol}}</td>
+                                <td>{{result.dietary_cholesterol}} mg</td>
+                            </tr>
+
+                            <tr> 
+                                <td>Sugar</td>
+                                <td>{{result.sugar}} grams</td>
+                            </tr>
+                             
+                        </tbody>
+                    </table>
+
+            </div>
+
+            <div class="col-md-6">
+                <h2>Amino Acids:</h2>
+            
+                    <table class="table table-striped table-bordered" style="width:100%">
+
+                        <thead>
+                            <tr>
+                                
+                                <th>Acids</th>
+                                <th>Recommended Intake Per Day</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> 
+                                <td>Histidine</td>
+                                <td>{{amino_acids.histidine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Isoleucine</td>
+                                <td>{{amino_acids.isoleucine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Leucine</td>
+                                <td>{{amino_acids.leucine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Lysine</td>
+                                <td>{{amino_acids.lysine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Methionine</td>
+                                <td>{{amino_acids.methionine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Cysteine</td>
+                                <td>{{amino_acids.cysteine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Phenylalanine</td>
+                                <td>{{amino_acids.phenylalanine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Tyrosine</td>
+                                <td>{{amino_acids.tyrosine}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Threonine</td>
+                                <td>{{amino_acids.threonine}} mg</td>
+                            </tr>
+
+                            <tr> 
+                                <td>Tryptophan</td>
+                                <td>{{amino_acids.tryptophan}} mg</td>
+                            </tr>
+                            <tr> 
+                                <td>Valine</td>
+                                <td>{{amino_acids.valine}} mg</td>
                             </tr>
                              
                         </tbody>

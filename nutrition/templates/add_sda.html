@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block title %} Add SDA {% endblock %}
+
+
+
+{% block content %}
+
+<section style="background-color: #eee;">
+
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'add_nutrition' %}">Add Nutrition</a></li>
+            <li class="breadcrumb-item">Add your SDA</li>
+            <li class="breadcrumb-item"><a href="{% url 'profile' %}">User Profile</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h3>Add you own self Recommended Daily Intake</h3>
+            <hr>
+            <h1>COMING SOON!!!</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

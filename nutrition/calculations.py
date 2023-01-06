@@ -54,6 +54,173 @@ def age_stage(age):
 
 
 
+class AminoAcids:
+    def __init__(self, sex, age, weight, pregnancy):
+
+        self.sex = sex
+        self.age = age
+        self.pregnancy = pregnancy
+        self.weight = weight
+
+        self.histidine = None
+        self.isoleucine = None
+        self.leucine = None
+        self.lysine = None
+        self.methionine = None
+        self.cysteine = None
+        self.phenylalanine = None
+        self.tyrosine = None
+        self.threonine = None
+        self.tryptophan = None
+        self.valine = None
+
+    def return_amino_acids(self):
+
+        if self.pregnancy:
+            if self.pregnancy in ["pregnant-1st-trimester", "pregnant-2nd-trimester", "pregnant-2nd-trimester-more", "pregnant-3rd-trimester"]:
+                self.histidine = self.weight * 18
+                self.isoleucine = self.weight * 25
+                self.leucine = self.weight * 56
+                self.lysine = self.weight * 51
+                self.methionine = self.weight * 25
+                self.cysteine = self.weight * 25
+                self.phenylalanine = self.weight * 44
+                self.tyrosine = self.weight * 44
+                self.threonine = self.weight * 26
+                self.tryptophan = self.weight * 7
+                self.valine = self.weight *  31
+            else:
+                self.histidine = self.weight * 19
+                self.isoleucine = self.weight * 30
+                self.leucine = self.weight * 62
+                self.lysine = self.weight * 52
+                self.methionine = self.weight * 26
+                self.cysteine = self.weight * 26
+                self.phenylalanine = self.weight * 51
+                self.tyrosine = self.weight * 51
+                self.threonine = self.weight * 30
+                self.tryptophan = self.weight * 9
+                self.valine = self.weight *  35
+        
+        else:
+            if 0 < self.age <= 0.5:
+                self.histidine = self.weight * 36
+                self.isoleucine = self.weight * 88
+                self.leucine = self.weight * 156
+                self.lysine = self.weight * 107
+                self.methionine = self.weight * 59
+                self.cysteine = self.weight * 59
+                self.phenylalanine = self.weight * 135
+                self.tyrosine = self.weight * 135
+                self.threonine = self.weight * 73
+                self.tryptophan = self.weight * 28
+                self.valine = self.weight *  87
+            elif self.age <= 1:
+                self.histidine = self.weight * 32
+                self.isoleucine = self.weight * 43
+                self.leucine = self.weight * 93
+                self.lysine = self.weight * 89
+                self.methionine = self.weight * 43
+                self.cysteine = self.weight * 43
+                self.phenylalanine = self.weight * 84
+                self.tyrosine = self.weight * 84
+                self.threonine = self.weight * 49
+                self.tryptophan = self.weight * 13
+                self.valine = self.weight *  58
+            elif self.age <= 3:
+                self.histidine = self.weight * 21
+                self.isoleucine = self.weight * 28
+                self.leucine = self.weight * 63
+                self.lysine = self.weight * 58
+                self.methionine = self.weight * 28
+                self.cysteine = self.weight * 28
+                self.phenylalanine = self.weight * 54
+                self.tyrosine = self.weight * 54
+                self.threonine = self.weight * 32
+                self.tryptophan = self.weight * 8
+                self.valine = self.weight *  37
+            elif self.age <= 8:
+                self.histidine = self.weight * 16
+                self.isoleucine = self.weight * 22
+                self.leucine = self.weight * 49
+                self.lysine = self.weight * 46
+                self.methionine = self.weight * 22
+                self.cysteine = self.weight * 22
+                self.phenylalanine = self.weight * 41
+                self.tyrosine = self.weight * 41
+                self.threonine = self.weight * 24
+                self.tryptophan = self.weight * 6
+                self.valine = self.weight *  28
+            elif self.age <= 13 and self.sex == 'male':
+                self.histidine = self.weight * 17
+                self.isoleucine = self.weight * 22
+                self.leucine = self.weight * 49
+                self.lysine = self.weight * 46
+                self.methionine = self.weight * 22
+                self.cysteine = self.weight * 22
+                self.phenylalanine = self.weight * 41
+                self.tyrosine = self.weight * 41
+                self.threonine = self.weight * 24
+                self.tryptophan = self.weight * 6
+                self.valine = self.weight * 28
+            elif self.age <= 13 and self.sex == 'female':
+                self.histidine = self.weight * 15
+                self.isoleucine = self.weight * 21
+                self.leucine = self.weight * 47
+                self.lysine = self.weight * 43
+                self.methionine = self.weight * 21
+                self.cysteine = self.weight * 21
+                self.phenylalanine = self.weight * 38
+                self.tyrosine = self.weight * 38
+                self.threonine = self.weight * 22
+                self.tryptophan = self.weight * 6
+                self.valine = self.weight * 27
+            elif self.age <= 18 and self.sex == 'male':
+                self.histidine = self.weight * 15
+                self.isoleucine = self.weight * 21
+                self.leucine = self.weight * 47
+                self.lysine = self.weight * 43
+                self.methionine = self.weight * 21
+                self.cysteine = self.weight * 21
+                self.phenylalanine = self.weight * 38
+                self.tyrosine = self.weight * 38
+                self.threonine = self.weight * 22
+                self.tryptophan = self.weight * 6
+                self.valine = self.weight * 27
+            elif self.age <= 18 and self.sex == 'female':
+                self.histidine = self.weight * 14
+                self.isoleucine = self.weight * 19
+                self.leucine = self.weight * 44
+                self.lysine = self.weight * 40
+                self.methionine = self.weight * 19
+                self.cysteine = self.weight * 19
+                self.phenylalanine = self.weight * 35
+                self.tyrosine = self.weight * 35
+                self.threonine = self.weight * 21
+                self.tryptophan = self.weight * 5
+                self.valine = self.weight * 24
+            else:
+                self.histidine = self.weight * 14
+                self.isoleucine = self.weight * 19
+                self.leucine = self.weight * 42
+                self.lysine = self.weight * 38
+                self.methionine = self.weight * 19
+                self.cysteine = self.weight * 19
+                self.phenylalanine = self.weight * 33
+                self.tyrosine = self.weight * 33
+                self.threonine = self.weight * 20
+                self.tryptophan = self.weight * 5
+                self.valine = self.weight * 24
+        
+        res = {"histidine": self.histidine, "isoleucine": self.isoleucine, "leucine": self.leucine, "lysine": self.lysine,
+               "methionine": self.methionine, "cysteine": self.cysteine, "phenylalanine": self.phenylalanine, "tyrosine": self.tyrosine,
+               "threonine": self.threonine, "tryptophan": self.tryptophan, "valine": self.valine}
+
+        return res
+        
+    
+
+
 class Minerals:
     def __init__(self, sex, age, pregnancy):
 
@@ -911,15 +1078,15 @@ class DRICalculations:
         self.bmi = self.body_mass_index()
         self.eer = self.energy()
         self.dri = self.dietary_reference_intakes()
-        self.carbohydrate = "255 - 520"
+        self.carbohydrate = 520
         self.t_f = self.total_fiber()
         self.protein = self.protein_cal()
-        self.fat = "71 - 124"
-        self.sat_fat = "Currently Unknown"
-        self.trans_fat = "Currently Unknown"
+        self.fat = None
+        self.sat_fat = None
+        self.trans_fat = None
         self.l_acid = self.linolenic_acid()
         self.al_acid = self.a_linolenic_acid()
-        self.dietary_cholesterol = "Currently Unknown"
+        self.dietary_cholesterol = None
         self.water = self.total_water()
 
 
@@ -1208,6 +1375,45 @@ class DRICalculations:
     
         return water
 
+    def fat_cal(self):
+        if 0 < self.eer <= 1200:
+            self.sat_fat = 11
+            if self.sex == "male":
+                self.fat = 47
+            else:
+                self.fat = 36
+        elif 1200 < self.eer <= 1500:
+            self.sat_fat = 12
+            if self.sex == "male":
+                self.fat = 58
+            else:
+                self.fat = 55
+        elif 1500 < self.eer <= 1800:
+            self.sat_fat = 13
+            if self.sex == "male":
+                self.fat = 70
+            else:
+                self.fat = 70
+        elif 1800 < self.eer <= 2000:
+            self.sat_fat = 15
+            if self.sex == "male":
+                self.fat = 78
+            else:
+                self.fat = 75
+        elif 2000 < self.eer <= 2200:
+            self.sat_fat = 16
+            if self.sex == "male":
+                self.fat = 80
+            else:
+                self.fat = 80
+        else:
+            self.sat_fat = 18
+            self.fat = 93
+
+        if self.age <= 15:
+            self.trans_fat = 1
+        else:
+            self.trans_fat = 2
     
     def return_results(self):
 
@@ -1218,14 +1424,24 @@ class DRICalculations:
         minerals = Minerals(sex=self.sex, age=self.age, pregnancy=self.pregnancy)
         all_minerals = minerals.return_minerals()
 
+        amino_acids = AminoAcids(sex=self.sex, age=self.age, weight=self.weight, pregnancy=self.pregnancy)
+        all_amino_acids = amino_acids.return_amino_acids()
+
         main_info = {"bmi": self.bmi, "caloric_needs": self.eer, "total_water": self.water}
 
+        if self.age < 15:
+            sugar = 24
+        else:
+            sugar = 36
+
+        self.fat_cal()
+        self.dietary_cholesterol = 300
 
 
         result = {"carbohydrate": self.carbohydrate,
                   "total_fiber": self.t_f, "protein": self.protein, "fat": self.fat, "sat_fat": self.sat_fat, "trans_fat": self.trans_fat,
-                  "l_acid": self.l_acid, "al_acid": self.al_acid, "dietary_cholesterol": self.dietary_cholesterol}
+                  "l_acid": self.l_acid, "al_acid": self.al_acid, "dietary_cholesterol": self.dietary_cholesterol, "sugar":sugar}
 
 
         
-        return main_info, result, all_vitamins, all_minerals
+        return main_info, result, all_vitamins, all_minerals, all_amino_acids

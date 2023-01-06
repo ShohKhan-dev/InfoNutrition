@@ -35,10 +35,17 @@
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto navbar-links">
 
         <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="{% url 'nutritions'%}">Nutritions</a>
-        <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="{% url 'visualization'%}">Visualizations</a>
+        <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="{% url 'visualization'%}">Info</a>
         <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="{% url 'calculate' %}">Calculator</a>
-        <!-- <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="#">Recipes</a> -->
         <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="{% url 'article'%}">About</a>
+        {% if request.user.is_authenticated %}
+        <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="{% url 'profile'%}">Profile</a>
+        {% else %}
+        <a class="me-3 py-2 text-dark text-decoration-none nav-link-item" href="{% url 'account_login' %}">Login</a>
+
+        {% endif %}
+        
+        
       </nav>
       
     </div>
@@ -64,7 +71,7 @@
         <h5>Features</h5>
         <ul class="list-unstyled text-small">
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">About Nutritions</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Visualizations</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Information</a></li>
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Manage Your Food</a></li>
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Get Advice</a></li>
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Food Recipes</a></li>

@@ -24,3 +24,22 @@ max-width: 700px;
     color: #fff;
     border-bottom-color: red!important;
 }
+
+
+.chip {
+    display: inline-block;
+    margin: 5px 3px;
+    padding: 0 20px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 40px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    color: #000;
+    border: none;
+  }
+
+  .chip:hover {
+    background-color: #ccc8c8;
+  }
+

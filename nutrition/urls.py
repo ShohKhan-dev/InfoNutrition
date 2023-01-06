@@ -10,6 +10,14 @@ urlpatterns = [
     path("dri-calculator/", views.calculate, name="calculate"),
     path("dri-calculator/result/", views.dri_result, name="dri_result"),
 
+    path("profile/", views.profile, name="profile"),
+    path("data_date/", views.data_date, name="data_date"),
+
+    path("add_nutrition/", views.add_nutrition, name="add_nutrition"),
+    path("add_sda/", views.add_sda, name="add_sda"),
+    path("store_consumed_nutritions/", views.store_consumed_nutritions, name="store_consumed_nutritions"),
+    
+
     path("visualization/", views.visualization, name="visualization"),
     path("visualization/basic_food/", views.basicFood, name="basic_food"),
     

@@ -34,20 +34,38 @@
                 {% csrf_token %}
             
                 <div class="row my-4">
-                    <h5>Sex:</h5>
-                    <hr>
-                    <div class="form-check">
-                        <input class="form-check-input" name="sex" type="radio" value="male" onclick="maleSelected(this)" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                        Male
-                        </label>
+                    <div class="col-md-6 my-2">
+                        <h5>Gender:</h5>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" name="sex" type="radio" value="male" onclick="maleSelected(this)" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            Male
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="sex" onselect="" type="radio" value="female" onclick="maleSelected(this)" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Female
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="sex" onselect="" type="radio" value="female" onclick="maleSelected(this)" id="flexRadioDefault2" checked>
-                        <label class="form-check-label" for="flexRadioDefault2">
-                        Female
-                        </label>
+                    <div class="col-md-6 my-2">
+                        <h5>Time Zone:</h5>
+                        <hr>
+                        <div class="input-group mb-3">
+                            <select class="form-select" aria-label="Default select example" id="timezone" name="timezone">
+                                <option selected value="">--Select--</option>
+                                {% for timezone in timezones %}
+                                    <option value="{{timezone}}">{{timezone}}</option>
+                                {% endfor %}        
+                            </select>
+                
+                        </div>
+
                     </div>
+
+                    
                 </div>
                 <div class="row my-4">
 
@@ -68,8 +86,6 @@
                         <div class="input-group mb-3">
                             <input type="number" class="form-control" name="height" id="height-input" min="1" aria-describedby="height-addon" required>
                             <span class="input-group-text" id="height-addon">Centimeters</span>
-                            
-                            
                         </div>
                     </div>
 
