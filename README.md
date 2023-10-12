@@ -19,7 +19,6 @@
 
 ### Database : postgresql 12+
 
-
 ## Live: [https://shohjahonh.pythonanywhere.com/](https://shohjahonh.pythonanywhere.com/)
 
 
